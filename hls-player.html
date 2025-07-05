@@ -15,14 +15,13 @@
     }
     video {
       width: 100%;
-      max-width: 100%;
       height: auto;
       outline: none;
     }
   </style>
 </head>
 <body>
-  <video id="video" controls playsinline></video>
+  <video id="video" controls autoplay muted playsinline></video>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
@@ -34,12 +33,10 @@
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.muted = true;   // penting: autoplay aktif saat muted
         video.play();
       });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
-      video.muted = true;
       video.addEventListener('loadedmetadata', function () {
         video.play();
       });
